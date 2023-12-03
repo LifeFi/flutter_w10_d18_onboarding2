@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_w10_d18_onboarding2/constants/gaps.dart';
 import 'package:flutter_w10_d18_onboarding2/constants/sizes.dart';
 import 'package:flutter_w10_d18_onboarding2/features/authentication/views/agree_screen.dart';
+import 'package:flutter_w10_d18_onboarding2/features/authentication/views/confirmation_code_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -94,14 +95,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (_formKey.currentState != null) {
         if (_formKey.currentState!.validate()) {
           _formKey.currentState!.save();
-          showDialog(
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ConfirmationCodeScreen(
+                email: formData["email"]!,
+              ),
+            ),
+          );
+          /* showDialog(
             context: context,
             builder: (context) {
               return AlertDialog(
                 content: Text("$formData $isAgree"),
               );
             },
-          );
+          ); */
         }
       }
     }
